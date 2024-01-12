@@ -24,14 +24,15 @@ const AuthForm = ({ onLoginSuccess }) => {
     e.preventDefault();
 
     try {
-      const result = await login({ email, password });
+      const result = await login({email, password});
       console.log("Auth successful:", result);
 
       // Mettre à jour l'état d'authentification après une connexion réussie
+      
       onLoginSuccess();
-
+      checkAuthentication();
       // Appeler la vérification de l'authentification après la connexion réussie
-      await checkAuthentication();
+      
     } catch (error) {
       console.error("Auth failed:", error);
     }
@@ -39,6 +40,8 @@ const AuthForm = ({ onLoginSuccess }) => {
     setEmail("");
     setPassword("");
   };
+
+  
 
   return (
     <form onSubmit={handleSubmit}>

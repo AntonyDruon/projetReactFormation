@@ -4,7 +4,7 @@ import PatisserieCard from "../Card/Card";
 const home = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data, isLoading } = useGetPastriesQuery();
-  let imgPath = "src/assets/";
+
   return (
     <>
       <div>
@@ -41,7 +41,7 @@ const home = () => {
             {data.map((element) => (
               <PatisserieCard
                 key={element.id}
-                photo={imgPath + element.image}
+                photo={element.image}
                 titre={element.name}
                 nombreRestant={element.quantity}
               />

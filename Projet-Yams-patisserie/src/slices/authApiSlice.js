@@ -5,22 +5,27 @@ export const authApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001" }),
   endpoints: (builder) => ({
     login: builder.mutation({
-      query: ({ email, password }) => ({
+      query: (data) => ({
         url: "/login",
         method: "POST",
-        body: { email, password },
+        body: data,
         credentials: "include",
       }),
     }),
     logout: builder.query({
-      query: () => "/logout",
-      method: "GET",
-      credentials: "include",
+      query: () => ({
+        url: "/logout",
+        method: "GET",
+        credentials: "include",
+      })
     }),
     checkAuthentication: builder.query({
-      query: () => "/me",
-      method: "GET",
-      credentials: "include",
+      query: () =>({
+        url: "/me",
+        method: "GET",
+        credentials: "include",
+      }) 
+      
     }),
   }),
 });
