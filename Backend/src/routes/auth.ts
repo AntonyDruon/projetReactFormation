@@ -20,7 +20,7 @@ const router: Router = express.Router();
 // Endpoint pour vérifier email et le password pour se connecter
 router.post("/login", (req: Request, res: Response) => {
   const { email, password } = trimAll(req.body); // récupération des données du formulaire de login (email et password)
-
+console.log("req.body", req.body)
   if (!email || !password) {
     return res
       .status(400)
@@ -52,7 +52,8 @@ router.post("/login", (req: Request, res: Response) => {
       console.log("création du token");
       res.cookie("token", token, { httpOnly: true, secure: false }); // écriture du cookie avec la valeur du token jwt
       /* httpOnly protege des attaques XSS (quelqu'un de malveillant ne pourra pas lire le cookie facilement) */
-      console.log("fin du result");
+      console.log("tokenServices", token);
+      console.log("-----------------------------------Fin auth------------------------------")
       return res
         .status(200)
         .json({ message: "Vous êtes bien connecté !", id: user.id });

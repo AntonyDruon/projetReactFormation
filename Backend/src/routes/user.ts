@@ -16,8 +16,10 @@ router.get('/users', function (req: Request, res: Response) {
 });
 
 router.get('/me', authentified, function (req: Request, res: Response) {
+    console.log("on rentre dans la route /me")
     const userId = res.locals.id; // res.locals.id est défini dans le middleware authentified
     // find user by id
+    console.log("userId", userId)
     const user: User | undefined = users.find(u => u.id == userId);
     if (user) {
         // on duplique l'utilisateur sans le champ password

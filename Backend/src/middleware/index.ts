@@ -11,14 +11,18 @@ export const authentified = async (
     const token: string = req.params?.token ?? req.cookies?.token ?? "";
     console.log("token", req.params.token);
     console.log("cookies", req.cookies.token);
+    console.log("tokenString", token)
 
     if (!token) {
+      console.log("si le token n'existe pas, on renvoie acces interdit")
       // aucun token = accès interdit
       return res.status(401).json({ message: "Accès interdit" });
     } else {
       // avec jwt on vérifie si le token est valide en fonction de la clé secrète
+      console.log("si le token est valide")
       verify(token, "secret", (err: any, decoded: any) => {
         if (err) {
+          console.log("si le token n'est pas valide, on le reset")
           res.clearCookie("token"); // token invalide = on le supprime
           return res.status(401).json({ message: "Accès interdit" });
         }
